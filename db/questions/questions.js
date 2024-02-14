@@ -102,16 +102,50 @@ const addEmployee = function (roles, employees) {
 };
 
 const updateEmployee = function (employees, roles) {
+    const newEmpList = [];
+    const newRoles = [];
+    for (let role of roles) {
+        const newRole = {
+            id: role.id,
+            name: role.title,
+            salary: role.salary,
+            department_id: role.department_id
+        } 
+        newRoles.push(newRole);
+    };
+    for (let employee of employees) {
+        const newEmp = {
+            id: employee.id,
+            name: `${employee.first_name} ${employee.last_name}`,
+            role_id: employee.role_id,
+            manager_id: employee.manager_id
+        }
+        newEmpList.push(newEmp);
+    };
     const newEmployee = [{
     type: 'list',
     name: 'empList',
     message: 'Select the employee you would like to update.',
-    choices: employees
+    choices: newEmpList,
+    filter(answer) {
+        for (let employee of newEmpList) {
+            if (employee.name.includes(answer)) {
+                return employee.id;
+            }
+        }
+    }
 }, {
     type: 'list',
     name: 'newEmpRole',
     message: 'Select the new role for the employee.',
-    choices: roles
+    choices: newRoles,
+    filter(answer) {
+        for (let role of newRoles) {
+            if (role.name.includes(answer)) {
+                return role.id;
+            }
+        }
+    }
 }];
 return newEmployee;
 };

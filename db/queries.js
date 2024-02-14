@@ -43,25 +43,19 @@ async function AddEmployee(first_name, last_name, role_id) {
             }
         });
     });
-}
+};
 
-async function UpdateEmployee() {
-    let employees = await db.promise().query(GetAllEmployees);
-    let roles = await db.promise().query(GetAllRoles);
-    try{
-        inquirer.prompt(updateEmployee(employees, roles)).then((answers) => {
-    const { empList, newEmpRole } = answers;
-    let query = `INSERT INTO role (title, salary, department_id) VALUES ("${empList}", "${newEmpRole}");`;
-
-    console.log(query);
-
-    db.query(query, function (err, results) {
-        console.log('Employee added successfully!');
+async function UpdateEmployee(employee, role) {
+    return new Promise((resolve, reject) => {
+        db.query(`Update employee SET role_id = ${role}
+        where id = ${employee};`, (err, results) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(results);
+            }
+        });
     });
-});
-} catch (error) {
-    console.log(error);
-}
 };
 
 module.exports = { GetAllDepartments, GetAllRoles, GetAllEmployees, AddDepartment, AddRole, AddEmployee, UpdateEmployee };

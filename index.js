@@ -75,8 +75,7 @@ async function init() {
                                 resolve(results);
                             }
                         });
-                    });
-                    console.log(getRoles);
+                    }); 
                     const getEmployees = await new Promise((resolve, reject) => {
                         db.query('SELECT * FROM employee;', (err, results) => {
                             if (err) {
@@ -86,14 +85,37 @@ async function init() {
                             }
                         });
                     });
-                    console.log(getEmployees);
                     const employeeAnswers = await inquirer.prompt(addEmployee(getRoles, getEmployees));
                     const { empFirstName, empLastName, empRole } = employeeAnswers;
                     await AddEmployee(empFirstName, empLastName, empRole);
                     console.log('Role added successfully.');
                     break;
                 case 'Update an employees role':
-                    // Handle update an employee's role
+                    const getRoles2 = await new Promise((resolve, reject) => {
+                        db.query('SELECT * FROM role;', (err, results) => {
+                            if (err) {
+                                reject(err);
+                            } else {
+                                resolve(results);
+                            }
+                        });
+                    });
+                    console.log(getRoles2);
+                    const getEmployees2 = await new Promise((resolve, reject) => {
+                        db.query('SELECT * FROM employee;', (err, results) => {
+                            if (err) {
+                                reject(err);
+                            } else {
+                                resolve(results);
+                            }
+                        });
+                    });
+                    console.log(getEmployees2);
+                    const employeeInfo = await inquirer.prompt(updateEmployee(getEmployees2, getRoles2));
+                    const {empList, newEmpRole} = employeeInfo;
+                    console.log(empList, newEmpRole);
+                    await UpdateEmployee(empList, newEmpRole);
+                    console.log('Employee Role updated successfully.');
                     break;
                 case 'Exit':
                     console.log('Exiting application. Have a good day!');
