@@ -18,11 +18,11 @@
 
 ## Installation 
 
-  To install the project, clone the repository to your local drive from GitHub. If you don't know how or are encountering issues with the clone, please refer to Github's documentation on cloning a repository. [Cloning a repository - Github Docs](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) 
+  To install the project, clone the repository to your local drive from GitHub. Ensure you have Node.JS installed. Once the terminal is open, navigate to the repository that you previously cloned onto your local drive. Once you are in that directory, enter ```npm install``` into the terminal to install all the necessary files. If you don't know how or are encountering issues with the clone, please refer to Github's documentation on cloning a repository. [Cloning a repository - Github Docs](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) 
 
 ## Usage 
 
-  To use the application, open a terminal on your computer. Once the terminal is open, navigate to the repository that you previously cloned onto your local drive. Once you are in that directory, enter <<npm install>> into the terminal to install all the necessary files. Next, rename the .envEXAMPLE file to be .env and enter fill out the database name, user, and password information that is required to access your database. Once all that is complete, enter <<node index.js>> into the terminal and follow the prompts to View/Add/Update the information in the database. 
+  To use the application, open a terminal on your computer. Next, rename the .envEXAMPLE file to be .env and fill out the database name, user, and password information that is required to access your database. Once all that is complete, enter ```node index.js``` into the terminal and follow the prompts to View/Add/Update the information in the database.
 
 ## License 
 
