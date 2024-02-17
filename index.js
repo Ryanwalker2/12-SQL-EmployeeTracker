@@ -86,8 +86,8 @@ async function init() {
                         });
                     });
                     const employeeAnswers = await inquirer.prompt(addEmployee(getRoles, getEmployees));
-                    const { empFirstName, empLastName, empRole } = employeeAnswers;
-                    await AddEmployee(empFirstName, empLastName, empRole);
+                    const { empFirstName, empLastName, empRole, empManager } = employeeAnswers;
+                    await AddEmployee(empFirstName, empLastName, empRole, empManager);
                     console.log('Role added successfully.');
                     break;
                 case 'Update an employees role':
@@ -100,7 +100,6 @@ async function init() {
                             }
                         });
                     });
-                    console.log(getRoles2);
                     const getEmployees2 = await new Promise((resolve, reject) => {
                         db.query('SELECT * FROM employee;', (err, results) => {
                             if (err) {
@@ -110,7 +109,6 @@ async function init() {
                             }
                         });
                     });
-                    console.log(getEmployees2);
                     const employeeInfo = await inquirer.prompt(updateEmployee(getEmployees2, getRoles2));
                     const {empList, newEmpRole} = employeeInfo;
                     console.log(empList, newEmpRole);

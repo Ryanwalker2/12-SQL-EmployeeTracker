@@ -33,9 +33,9 @@ async function AddRole(title, salary, department_id) {
     });
 }
 
-async function AddEmployee(first_name, last_name, role_id) {
+async function AddEmployee(first_name, last_name, role_id, manager_id) {
     return new Promise((resolve, reject) => {
-        db.query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ('${first_name}', '${last_name}', ${role_id}, 0);`, (err, results) => {
+        db.query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ('${first_name}', '${last_name}', ${role_id}, ${manager_id});`, (err, results) => {
             if (err) {
                 reject(err);
             } else {

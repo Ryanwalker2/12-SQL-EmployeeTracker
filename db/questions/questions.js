@@ -64,7 +64,9 @@ const addEmployee = function (roles, employees) {
             manager_id: employee.manager_id
         }
         newEmployees.push(newEmp);
-    }
+        if (!newEmployees.includes('null')) {
+        newEmployees.push('null');
+    }};
   const addEmployee = [{
     type: 'input',
     name: 'empFirstName',
@@ -89,13 +91,16 @@ const addEmployee = function (roles, employees) {
     type: 'list',
     name: 'empManager',
     message: 'Who will this employee report to?',
-    choices: [newEmployees, 'null'],
+    choices: newEmployees,
     filter(answer) {
         for (let employee of newEmployees) {
-            if (employee.name.includes(answer)) {
-                return employee.id;
-            }
-        }
+            if (answer == 'null') {
+                return null;
+            };
+            if (answer == employee.name) {
+                return employee.id
+            };
+        };
     }
 }];
     return addEmployee;
@@ -131,7 +136,7 @@ const updateEmployee = function (employees, roles) {
         for (let employee of newEmpList) {
             if (employee.name.includes(answer)) {
                 return employee.id;
-            }
+                };
         }
     }
 }, {
